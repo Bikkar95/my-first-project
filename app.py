@@ -1,0 +1,1 @@
+print("Hello! Mai Python seekh raha hoon.")

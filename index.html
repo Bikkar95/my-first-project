@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Beautiful Login Page</title>
+    <style>
+        /* पूरे पेज की सेटिंग */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* लेफ्ट साइड का मेन डिब्बा */
+        .left-side {
+            flex: 1.2;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* पीछे का धुंधला बैकग्राउंड */
+        .blur-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: blur(15px);
+            transform: scale(1.1);
+            z-index: 1;
+        }
+
+        /* बीच की असली खड़ी इमेज */
+        .main-img {
+            position: relative;
+            z-index: 2;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* राइट side: लॉगिन फॉर्म का एरिया */
+        .right-side {
+            flex: 0.8;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        /* फॉर्म का डिब्बा */
+        .form-container {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .form-container h2 {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 28px;
+        }
+
+        .form-container p {
+            margin-bottom: 25px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* इनपुट बॉक्स (Username & Password) */
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #444;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+        }
+
+        /* लॉगिन बटन */
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* लिंक्स (Forgot Password & Create User) */
+        .extra-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        .extra-links a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .extra-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* 📱 मोबाइल के लिए सेटिंग */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .left-side {
+                display: none;
+            }
+            .right-side {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- लेफ्ट साइड: इसमें धुंधला बैकग्राउंड और असली इमेज (.png के साथ) है -->
+    <div class="left-side">
+        <div class="blur-bg" style="background-image: url('my-bg.png');"></div>
+        <img src="my-bg.png" alt="Background" class="main-img">
+    </div>
+
+    <!-- राइट साइड: लॉगिन फॉर्म -->
+    <div class="right-side">
+        <div class="form-container">
+            <h2>Welcome Back!</h2>
+            <p>Please login to your account.</p>
+            
+            <form>
+                <div class="input-group">
+                    <label for="username">Username / Email</label>
+                    <input type="text" id="username" placeholder="Enter your username" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+                
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+
+            <div class="extra-links">
+                <a href="#" id="forgot-link">Forgot Password?</a>
+                <a href="#" id="signup-link">Create User</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
