@@ -8,7 +8,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { display: flex; height: 100vh; background-color: #f4f6f9; overflow: hidden; }
 
-        /* 🚪 लॉगिन स्क्रीन (जब तक लॉगिन न हो) */
+        /* 🚪 लॉगिन स्क्रीन */
         #auth-page { display: flex; width: 100%; height: 100vh; position: absolute; z-index: 100; background: white; }
         .left-side { flex: 1.2; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; }
         .blur-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; filter: blur(15px); transform: scale(1.1); z-index: 1; }
@@ -25,18 +25,14 @@
         .extra-links { margin-top: 20px; display: flex; justify-content: space-between; font-size: 14px; }
         .extra-links a { color: #007bff; text-decoration: none; cursor: pointer; }
 
-        /* 🖥️ मुख्य सॉफ्टवेयर डैशबोर्ड (लॉगिन के बाद दिखेगा) */
+        /* 🖥️ मुख्य डैशबोर्ड */
         #dashboard-page { display: none; width: 100%; height: 100vh; flex-direction: column; }
-        
-        /* ऊपर की पट्टी (Header) */
         .navbar { height: 60px; background-color: #2c3e50; color: white; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
         .navbar h1 { font-size: 20px; }
         .logout-btn { padding: 8px 15px; background-color: #e74c3c; border: none; color: white; border-radius: 4px; cursor: pointer; font-weight: bold; }
-
-        /* मुख्य एरिया और साइडबार */
         .workspace-container { display: flex; flex: 1; overflow: hidden; }
         
-        /* साइडबार (टैब बटन यहाँ हैं) */
+        /* साइडबार */
         .sidebar { width: 250px; background-color: #34495e; padding: 20px 10px; display: flex; flex-direction: column; gap: 10px; }
         .tab-btn { padding: 12px 15px; background: none; border: none; color: #ecf0f1; text-align: left; font-size: 16px; border-radius: 6px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
         .tab-btn:hover, .tab-btn.active { background-color: #1abc9c; color: white; font-weight: bold; }
@@ -46,26 +42,42 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
-        /* 📚 TAB 1: Study Vault की डिज़ाइन */
-        .semester-box { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .semester-box h3 { color: #2c3e50; margin-bottom: 15px; border-bottom: 2px solid #ecf0f1; padding-bottom: 5px; }
+        /* 📚 Study Vault (Organized Layout) */
+        .semester-container { display: flex; flex-direction: column; gap: 25px; }
+        .semester-box { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .semester-box h3 { color: #2c3e50; margin-bottom: 15px; border-bottom: 2px solid #1abc9c; padding-bottom: 5px; font-size: 20px; }
         .file-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-        .file-item { display: flex; justify-content: space-between; align-items: center; background: #f8f9fa; padding: 10px 15px; border-radius: 6px; border-left: 4px solid #007bff; }
-        .download-link { color: #007bff; text-decoration: none; font-weight: bold; }
+        .file-item { display: flex; justify-content: space-between; align-items: center; background: #f8f9fa; padding: 12px 15px; border-radius: 6px; border-left: 4px solid #007bff; }
+        .file-name { font-weight: 500; color: #333; }
+        .btn-group { display: flex; gap: 10px; }
+        .btn-group a, .btn-group button { padding: 6px 12px; border-radius: 4px; text-decoration: none; font-size: 14px; font-weight: bold; cursor: pointer; border: none; }
+        .preview-btn { background-color: #3498db; color: white; }
+        .preview-btn:hover { background-color: #2980b9; }
+        .download-btn { background-color: #2ecc71; color: white; }
+        .download-btn:hover { background-color: #27ae60; }
 
-        /* 📊 TAB 2: Data Analytics की डिज़ाइन */
+        /* 📊 Data Analytics */
         .upload-section { background: white; padding: 30px; border-radius: 8px; text-align: center; border: 2px dashed #3498db; margin-bottom: 25px; }
         .excel-btn { padding: 10px 20px; background-color: #27ae60; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        .dummy-report { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 100px)); gap: 20px; margin-top: 20px; }
+        .dummy-report { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px; }
         .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); text-align: center; border-top: 4px solid #27ae60; }
         .card h4 { color: #7f8c8d; font-size: 14px; margin-bottom: 5px; }
         .card p { font-size: 24px; font-weight: bold; color: #2c3e50; }
+
+        /* 🔍 PDF Preview Modal (पॉप-अप विंडो) */
+        .modal { display: none; position: fixed; z-index: 200; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); justify-content: center; align-items: center; }
+        .modal-content { background-color: white; width: 80%; height: 85%; border-radius: 8px; display: flex; flex-direction: column; overflow: hidden; }
+        .modal-header { padding: 15px; background: #2c3e50; color: white; display: flex; justify-content: space-between; align-items: center; }
+        .close-modal { font-size: 24px; cursor: pointer; background: none; border: none; color: white; }
+        .modal-body { flex: 1; width: 100%; height: 100%; }
+        .modal-body iframe { width: 100%; height: 100%; border: none; }
 
         @media (max-width: 768px) {
             .workspace-container { flex-direction: column; }
             .sidebar { width: 100%; flex-direction: row; overflow-x: auto; padding: 10px; }
             .left-side { display: none; }
             .right-side { flex: 1; }
+            .modal-content { width: 95%; height: 90%; }
         }
     </style>
 </head>
@@ -83,11 +95,11 @@
                 <form id="real-login-form">
                     <div class="input-group">
                         <label>Username / Email</label>
-                        <input type="text" id="login-user" placeholder="Enter your username" required>
+                        <input type="text" placeholder="Enter your username" required>
                     </div>
                     <div class="input-group">
                         <label>Password</label>
-                        <input type="password" id="login-pass" placeholder="Enter your password" required>
+                        <input type="password" placeholder="Enter your password" required>
                     </div>
                     <button type="submit" class="action-btn">Login</button>
                 </form>
@@ -97,24 +109,12 @@
                 </div>
             </div>
             <div class="form-container" id="signup-form">
-                <h2>Create Account</h2>
-                <p>Join us today!</p>
-                <form onsubmit="event.preventDefault(); alert('Account created! Please Login.'); showAuthForm(loginForm);">
-                    <div class="input-group"><label>Full Name</label><input type="text" required></div>
-                    <div class="input-group"><label>Email Address</label><input type="email" required></div>
-                    <div class="input-group"><label>Password</label><input type="password" required></div>
-                    <button type="submit" class="action-btn">Sign Up</button>
-                </form>
-                <div class="extra-links"><a class="go-to-login">Already have an account? Login</a></div>
+                <h2>Create Account</h2><p>Join us today!</p>
+                <form onsubmit="event.preventDefault(); showAuthForm(loginForm);"><button class="action-btn">Back to Login</button></form>
             </div>
             <div class="form-container" id="forgot-form">
-                <h2>Reset Password</h2>
-                <p>Enter email to get reset link.</p>
-                <form onsubmit="event.preventDefault(); alert('Reset link sent!'); showAuthForm(loginForm);">
-                    <div class="input-group"><label>Email Address</label><input type="email" required></div>
-                    <button type="submit" class="action-btn">Send Reset Link</button>
-                </form>
-                <div class="extra-links"><a class="go-to-login">Back to Login</a></div>
+                <h2>Reset Password</h2><p>Enter email.</p>
+                <form onsubmit="event.preventDefault(); showAuthForm(loginForm);"><button class="action-btn">Back to Login</button></form>
             </div>
         </div>
     </div>
@@ -132,57 +132,108 @@
             </div>
 
             <div class="content-area">
-                
                 <div id="study-vault" class="tab-content active">
                     <h2>Study Vault</h2>
-                    <p style="margin-bottom: 20px; color: #666;">Manage your semester notes and practical files here.</p>
+                    <p style="margin-bottom: 20px; color: #666;">Your semester-wise practical files and notes.</p>
                     
-                    <div class="semester-box">
-                        <h3>Semester 1</h3>
-                        <ul class="file-list">
-                            <li class="file-item">
-                                <span>📄 Programming in Python - Practical File.pdf</span>
-                                <a href="#" class="download-link" download>⬇️ Download</a>
-                            </li>
-                            <li class="file-item">
-                                <span>📝 Web Technology Notes.pdf</span>
-                                <a href="#" class="download-link" download>⬇️ Download</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="semester-box">
-                        <h3>Semester 2</h3>
-                        <p style="color: #999; font-style: italic;">No files uploaded yet. (We can add later)</p>
-                    </div>
+                    <div class="semester-container" id="semester-list-box"></div>
                 </div>
 
                 <div id="data-analytics" class="tab-content">
                     <h2>Data Analytics & Reporting</h2>
                     <p style="margin-bottom: 20px; color: #666;">Import Excel file to automate your manual reporting.</p>
-                    
                     <div class="upload-section">
                         <h3>Upload Excel Sheet (.xlsx)</h3>
-                        <p style="color: #666; margin-bottom: 10px;">Select your manual work file to generate a structured report.</p>
                         <input type="file" id="excel-file" accept=".xlsx, .xls">
                         <br>
                         <button class="excel-btn" onclick="alert('Python logic will process this file in next step!')">Import & Process</button>
                     </div>
-
-                    <h3>Structured Report Dashboard</h3>
-                    <div class="dummy-report">
-                        <div class="card"><h4>Total Rows Processed</h4><p>0</p></div>
-                        <div class="card"><h4>Total Entries</h4><p>0</p></div>
-                        <div class="card"><h4>Efficiency Rate</h4><p>100%</p></div>
-                    </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
+    <div id="preview-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-file-title">PDF Preview</h3>
+                <button class="close-modal" onclick="closePreview()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <iframe id="pdf-viewer" src=""></iframe>
             </div>
         </div>
     </div>
 
     <script>
-        // पुराने फॉर्म्स को बदलने का लॉजिक
+        // 📁 डेटाबेस सिस्टम: अपनी फाइलें यहाँ अपलोड/ऐड करें!
+        // भविष्य में जब भी नई फाइल जोड़नी हो, बस यहाँ नीचे लिस्ट में बढ़ा देना।
+        const myStudyData = {
+           
+            "Semester 3": [
+                { name: "Computer_Network(UGCA1916).pdf", url: "files/Semester3/Practical File Computer Network-1916.pdf" },
+                { name: "Data Structures(UGCA1918).pdf", url: "files/Semester3/Practical File Data Structures-UGCA1918.pdf" },
+                { name: "PC Assembly & Troubleshooting(UGCA1920).pdf", url: "files/Semester3/Practical File PCA&T-UGCA1920.pdf" },
+                { name: "Programming in Python(UGCA1914).pdf", url: "files/Semester3/Programming in Python-UGCA1914.pdf" }
+            ],
+            "Semester 4": [
+                { name: "Database Management Systems(UGCA1925).pdf", url: "files/Semester4/Practical File DBMS UGCA1925.pdf" },
+                { name: "Operating Systems(UGCA1926).pdf", url: "files/Semester4/PRACTICAL FILE_Operating Systems UGCA1926.pdf" },
+                { name: "Software Engineering(UGCA1924).pdf", url: "files/Semester4/Practical File-Software Engineering Laboratory UGCA1924.pdf" },
+                { name: "Web Designing(UGCA1928).pdf", url: "files/Semester4/Practical File-Web Designing UGCA1928.pdf" }
+            ]
+        
+        };
+
+        // 🛠️ ऑटोमेटिक ऑर्गेनाइज्ड लिस्ट बनाने वाला कोड
+        function loadStudyMaterials() {
+            const container = document.getElementById('semester-list-box');
+            container.innerHTML = ""; // साफ करना
+
+            for (const semName in myStudyData) {
+                // सेमेस्टर का बॉक्स बनाना
+                const semBox = document.createElement('div');
+                semBox.className = 'semester-box';
+                semBox.innerHTML = `<h3>${semName}</h3>`;
+
+                const fileList = document.createElement('ul');
+                fileList.className = 'file-list';
+
+                // उस सेमेस्टर की फाइलें जोड़ना
+                myStudyData[semName].forEach(file => {
+                    const fileItem = document.createElement('li');
+                    fileItem.className = 'file-item';
+                    fileItem.innerHTML = `
+                        <span class="file-name">📄 ${file.name}</span>
+                        <div class="btn-group">
+                            <button class="preview-btn" onclick="openPreview('${file.name}', '${file.url}')">👁️ Preview</button>
+                            <a href="${file.url}" class="download-btn" download>⬇️ Download</a>
+                        </div>
+                    `;
+                    fileList.appendChild(fileItem);
+                });
+
+                semBox.appendChild(fileList);
+                container.appendChild(semBox);
+            }
+        }
+
+        // 🔍 प्रीव्यू खोलने का फंक्शन
+        function openPreview(name, url) {
+            document.getElementById('modal-file-title').innerText = name;
+            document.getElementById('pdf-viewer').src = url;
+            document.getElementById('preview-modal').style.display = 'flex';
+        }
+
+        // ❌ प्रीव्यू बंद करने का फंक्शन
+        function closePreview() {
+            document.getElementById('preview-modal').style.display = 'none';
+            document.getElementById('pdf-viewer').src = ""; // मेमोरी साफ़ करने के लिए
+        }
+
+        // 🔐 लॉगिन और टैब स्विचिंग का सामान्य लॉजिक
+        const authPage = document.getElementById('auth-page');
+        const dashboardPage = document.getElementById('dashboard-page');
         const loginForm = document.getElementById('login-form');
         const signupForm = document.getElementById('signup-form');
         const forgotForm = document.getElementById('forgot-form');
@@ -196,34 +247,22 @@
             form.classList.add('active');
         }
 
-        // 🔐 असली जादू: लॉगिन होने पर सॉफ्टवेयर खोलना
-        const authPage = document.getElementById('auth-page');
-        const dashboardPage = document.getElementById('dashboard-page');
-
         document.getElementById('real-login-form').addEventListener('submit', (e) => {
             e.preventDefault();
-            // अभी के लिए कोई भी पासवर्ड डालो, सॉफ्टवेयर खुल जाएगा! बाद में इसे पाइथन से जोड़ेंगे।
             authPage.style.display = 'none';
             dashboardPage.style.display = 'flex';
+            loadStudyMaterials(); // लॉगिन होते ही सारा डाटा लोड हो जाएगा
         });
 
-        // 🚪 लॉगआउट बटन का लॉजिक
         document.getElementById('logout-link').addEventListener('click', () => {
             dashboardPage.style.display = 'none';
-            authPage.style.style.display = 'flex'; // एरर फिक्स के लिए इसे 'flex' किया
             authPage.style.display = 'flex';
         });
 
-        // 📑 टैब बदलने का लॉजिक (Study Vault <-> Data Analytics)
         function switchTab(tabId) {
-            // सभी कंटेंट्स छुपाओ
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            // सभी बटन से एक्टिव क्लास हटाओ
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-
-            // जिसे क्लिक किया उसे दिखाओ
             document.getElementById(tabId).classList.add('active');
-            // बटन को एक्टिव दिखाओ
             event.currentTarget.classList.add('active');
         }
     </script>
