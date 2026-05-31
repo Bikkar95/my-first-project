@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Beautiful Login Page</title>
+    <title>My Beautiful Multi-Form Page</title>
     <style>
         /* पूरे पेज की सेटिंग */
         * {
@@ -52,7 +52,7 @@
             object-fit: contain;
         }
 
-        /* राइट side: लॉगिन फॉर्म का एरिया */
+        /* राइट side: फॉर्म्स का एरिया */
         .right-side {
             flex: 0.8;
             background-color: #ffffff;
@@ -66,6 +66,13 @@
         .form-container {
             width: 100%;
             max-width: 400px;
+            /* 💡 जादू की शुरुआत: शुरू में फॉर्म छिपे रहें, इसलिए हमने यह सेटिंग की */
+            display: none; 
+        }
+
+        /* 💡 जो फॉर्म एक्टिव होगा, सिर्फ वही दिखेगा */
+        .form-container.active {
+            display: block;
         }
 
         .form-container h2 {
@@ -108,8 +115,8 @@
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
         }
 
-        /* लॉगिन बटन */
-        .login-btn {
+        /* बटन्स */
+        .action-btn {
             width: 100%;
             padding: 12px;
             background-color: #007bff;
@@ -122,11 +129,11 @@
             transition: 0.3s;
         }
 
-        .login-btn:hover {
+        .action-btn:hover {
             background-color: #0056b3;
         }
 
-        /* लिंक्स (Forgot Password & Create User) */
+        /* लिंक्स */
         .extra-links {
             margin-top: 20px;
             display: flex;
@@ -137,6 +144,7 @@
         .extra-links a {
             color: #007bff;
             text-decoration: none;
+            cursor: pointer;
         }
 
         .extra-links a:hover {
@@ -159,38 +167,116 @@
 </head>
 <body>
 
-    <!-- लेफ्ट साइड: इसमें धुंधला बैकग्राउंड और असली इमेज (.png के साथ) है -->
+    <!-- लेफ्ट साइड: इमेज -->
     <div class="left-side">
         <div class="blur-bg" style="background-image: url('my-bg.png');"></div>
         <img src="my-bg.png" alt="Background" class="main-img">
     </div>
 
-    <!-- राइट साइड: लॉगिन फॉर्म -->
+    <!-- राइट साइड: यहाँ हमारे तीनों फॉर्म्स हैं -->
     <div class="right-side">
-        <div class="form-container">
+        
+        <!-- 1. LOGIN FORM -->
+        <div class="form-container active" id="login-form">
             <h2>Welcome Back!</h2>
             <p>Please login to your account.</p>
-            
-            <form>
+            <form onsubmit="event.preventDefault();">
                 <div class="input-group">
-                    <label for="username">Username / Email</label>
-                    <input type="text" id="username" placeholder="Enter your username" required>
+                    <label>Username / Email</label>
+                    <input type="text" placeholder="Enter your username" required>
                 </div>
-                
                 <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Enter your password" required>
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password" required>
                 </div>
-                
-                <button type="submit" class="login-btn">Login</button>
+                <button type="submit" class="action-btn">Login</button>
             </form>
-
             <div class="extra-links">
-                <a href="#" id="forgot-link">Forgot Password?</a>
-                <a href="#" id="signup-link">Create User</a>
+                <a id="go-to-forgot">Forgot Password?</a>
+                <a id="go-to-signup">Create User</a>
             </div>
         </div>
+
+        <!-- 2. SIGN UP (CREATE USER) FORM -->
+        <div class="form-container" id="signup-form">
+            <h2>Create Account</h2>
+            <p>Join us today! It only takes a minute.</p>
+            <form onsubmit="event.preventDefault();">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Enter your full name" required>
+                </div>
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Create a strong password" required>
+                </div>
+                <button type="submit" class="action-btn">Sign Up</button>
+            </form>
+            <div class="extra-links">
+                <a class="go-to-login">Already have an account? Login</a>
+            </div>
+        </div>
+
+        <!-- 3. FORGOT PASSWORD FORM -->
+        <div class="form-container" id="forgot-form">
+            <h2>Reset Password</h2>
+            <p>Enter your email to get a reset link.</p>
+            <form onsubmit="event.preventDefault();">
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="Enter your registered email" required>
+                </div>
+                <button type="submit" class="action-btn">Send Reset Link</button>
+            </form>
+            <div class="extra-links">
+                <a class="go-to-login">Back to Login</a>
+            </div>
+        </div>
+
     </div>
+
+    <!-- 🔮 यहाँ से शुरू होता है JavaScript का असली जादू -->
+    <script>
+        // सभी फॉर्म्स को ढूंढना
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const forgotForm = document.getElementById('forgot-form');
+
+        // सभी बटन/लिंक्स को ढूंढना
+        const goToSignupLink = document.getElementById('go-to-signup');
+        const goToForgotLink = document.getElementById('go-to-forgot');
+        const goToLoginLinks = document.querySelectorAll('.go-to-login');
+
+        // फंक्शन: सभी फॉर्म्स को छुपाकर सिर्फ एक को दिखाना
+        function showForm(formToShow) {
+            loginForm.classList.remove('active');
+            signupForm.classList.remove('active');
+            forgotForm.classList.remove('active');
+            
+            formToShow.classList.add('active');
+        }
+
+        // जब 'Create User' पर क्लिक हो
+        goToSignupLink.addEventListener('click', () => {
+            showForm(signupForm);
+        });
+
+        // जब 'Forgot Password' पर क्लिक हो
+        goToForgotLink.addEventListener('click', () => {
+            showForm(forgotForm);
+        });
+
+        // जब 'Login' वाले लिंक पर क्लिक हो (दोनों फॉर्म्स से वापस आने के लिए)
+        goToLoginLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                showForm(loginForm);
+            });
+        });
+    </script>
 
 </body>
 </html>
