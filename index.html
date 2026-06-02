@@ -82,76 +82,79 @@
     </style>
 </head>
 <body>
-
-    <div id="auth-page">
-        <div class="left-side">
-            <div class="blur-bg" style="background-image: url('my-bg.png');"></div>
-            <img src="my-bg.png" alt="Background" class="main-img">
-        </div>
-        <div class="right-side">
-            <div class="form-container active" id="login-form">
-                <h2>Welcome Back!</h2>
-                <p>Please login to enter your workspace.</p>
-                <form id="real-login-form">
-                    <div class="input-group">
-                        <label>Username / Email</label>
-                        <input type="text" placeholder="Enter your username" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Password</label>
-                        <input type="password" placeholder="Enter your password" required>
-                    </div>
-                    <button type="submit" class="action-btn">Login</button>
-                </form>
-                <div class="extra-links">
-                    <a id="go-to-forgot">Forgot Password?</a>
-                    <a id="go-to-signup">Create User</a>
+<div id="auth-page">
+    <div class="left-side">
+        <div class="blur-bg" style="background-image: url('my-bg.png');"></div>
+        <img src="my-bg.png" alt="Background" class="main-img">
+    </div>
+    <div class="right-side">
+        <div class="form-container active" id="login-form">
+            <h2>Welcome Back!</h2>
+            <p>Please login to enter your workspace.</p>
+            <form id="real-login-form">
+                <div class="input-group">
+                    <label>Username / Email</label>
+                    <input type="text" placeholder="Enter your username" required>
                 </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="action-btn">Login</button>
+            </form>
+            <div class="extra-links">
+                <a id="go-to-forgot">Forgot Password?</a>
+                <a id="go-to-signup">Create User</a>
             </div>
-            <div class="form-container" id="signup-form">
-                <h2>Create Account</h2><p>Join us today!</p>
-                <form onsubmit="event.preventDefault(); showAuthForm(loginForm);"><button class="action-btn">Back to Login</button></form>
-            </div>
-            <div class="form-container" id="forgot-form">
-                <h2>Reset Password</h2><p>Enter email.</p>
-                <form onsubmit="event.preventDefault(); showAuthForm(loginForm);"><button class="action-btn">Back to Login</button></form>
-            </div>
+        </div>
+        <div class="form-container" id="signup-form">
+            <h2>Create Account</h2><p>Join us today!</p>
+            <form onsubmit="event.preventDefault(); showAuthForm(loginForm);"><button class="action-btn">Back to Login</button></form>
+        </div>
+        <div class="form-container" id="forgot-form">
+            <h2>Reset Password</h2><p>Enter email.</p>
+            <form onsubmit="event.preventDefault(); showAuthForm(loginForm);"><button class="action-btn">Back to Login</button></form>
         </div>
     </div>
+</div>
 
-    <div id="dashboard-page">
-        <div class="navbar">
-            <h1>Bikkar's Workspace 🚀</h1>
-            <button class="logout-btn" id="logout-link">Logout</button>
-        </div>
-
-        <div class="workspace-container">
-            <div class="sidebar">
-                <button class="tab-btn active" onclick="switchTab('study-vault')">📚 Study Vault</button>
-                <button class="tab-btn" onclick="switchTab('data-analytics')">📊 Data Analytics</button>
-            </div>
-
-            <div class="content-area">
-                <div id="study-vault" class="tab-content active">
-                    <h2>Study Vault</h2>
-                    <p style="margin-bottom: 20px; color: #666;">Your semester-wise practical files and notes.</p>
-                    
-                    <div class="semester-container" id="semester-list-box"></div>
-                </div>
-
-                <div id="data-analytics" class="tab-content">
-                    <h2>Data Analytics & Reporting</h2>
-                    <p style="margin-bottom: 20px; color: #666;">Import Excel file to automate your manual reporting.</p>
-                    <div class="upload-section">
-                        <h3>Upload Excel Sheet (.xlsx)</h3>
-                        <input type="file" id="excel-file" accept=".xlsx, .xls">
-                        <br>
-                        <button class="excel-btn" onclick="alert('Python logic will process this file in next step!')">Import & Process</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div id="dashboard-page">
+    <div class="navbar">
+        <h1>Bikkar's Workspace 🚀</h1>
+        <button class="logout-btn" id="logout-link">Logout</button>
     </div>
+
+    <div class="workspace-container">
+        
+        <div class="sidebar">
+            <button class="tab-btn active" onclick="switchTab('study-vault')">📚 Study Vault</button>
+            <button class="tab-btn" onclick="switchTab('data-analytics')">📊 Data Analytics</button>
+        </div>
+
+        <div class="content-area">
+            
+            <div id="study-vault" class="tab-content active">
+                <h2>Study Vault</h2>
+                <p style="margin-bottom: 20px; color: #666;">Your semester-wise practical files and notes.</p>
+                <div class="semester-container" id="semester-list-box"></div>
+            </div>
+
+            <div id="data-analytics" class="tab-content">
+                <h2>Data Analytics & Reporting</h2>
+                <p style="margin-bottom: 20px; color: #666;">Import Excel file to automate your manual reporting.</p>
+                
+                <div class="upload-section">
+                    <h3>Upload Excel Sheet (.xlsx)</h3>
+                    <input type="file" id="excel-file" accept=".xlsx, .xls">
+                    <br>
+                    <button class="excel-btn" onclick="alert('Python logic will process this file in next step!')">Import & Process</button>
+                </div>
+
+                <div id="preview-container" style="margin-top: 20px;"></div>
+            </div>
+
+        </div> </div> </div> ```
+
 
     <div id="preview-modal" class="modal">
         <div class="modal-content">
@@ -165,104 +168,167 @@
         </div>
     </div>
 
-    <script>
-        // 📁 डेटाबेस सिस्टम: अपनी फाइलें यहाँ अपलोड/ऐड करें!
-        // भविष्य में जब भी नई फाइल जोड़नी हो, बस यहाँ नीचे लिस्ट में बढ़ा देना।
-       const myStudyData = {
-            "Semester 3": [
-                { name: "Computer_Network(UGCA1916).pdf", url: "files/Semester3/practical_file_computer_network-UGCA1916.pdf" },
-                { name: "Data Structures(UGCA1918).pdf", url: "files/Semester3/practical_file_data_structures-UGCA1918.pdf" },
-                { name: "PC Assembly & Troubleshooting(UGCA1920).pdf", url: "files/Semester3/practical_file_PCA&T-UGCA1920.pdf" },
-                { name: "Programming in Python(UGCA1914).pdf", url: "files/Semester3/programming_in_python-UGCA1914.pdf" }
-            ],
-            "Semester 4": [
-                { name: "Database Management Systems(UGCA1925).pdf", url: "files/Semester4/practical-file_DBMS-UGCA1925.pdf" },
-                { name: "Operating Systems(UGCA1926).pdf", url: "files/Semester4/practical_file_operating_systems-UGCA1926.pdf" },
-                { name: "Software Engineering(UGCA1924).pdf", url: "files/Semester4/practical_file_software_engineering_UGCA1924.pdf" },
-                { name: "Web Designing(UGCA1928).pdf", url: "files/Semester4/practical_file_web_designing-UGCA1928.pdf" }
-            ]
-        };
+   <script>
+    // 📁 1. REGULATION REGISTER (Data Structure)
+    // Isme hum sirf semesters ka data rakhenge taaki yeh automatic display ho sake.
+    const myStudyData = {
+        "Semester 3": [
+            { name: "Computer_Network(UGCA1916).pdf", url: "files/Semester3/practical_file_computer_network-UGCA1916.pdf" },
+            { name: "Data Structures(UGCA1918).pdf", url: "files/Semester3/practical_file_data_structures-UGCA1918.pdf" },
+            { name: "PC Assembly & Troubleshooting(UGCA1920).pdf", url: "files/Semester3/practical_file_PCA&T-UGCA1920.pdf" },
+            { name: "Programming in Python(UGCA1914).pdf", url: "files/Semester3/programming_in_python-UGCA1914.pdf" }
+        ],
+        "Semester 4": [
+            { name: "Database Management Systems(UGCA1925).pdf", url: "files/Semester4/practical-file_DBMS-UGCA1925.pdf" },
+            { name: "Operating Systems(UGCA1926).pdf", url: "files/Semester4/practical_file_operating_systems-UGCA1926.pdf" },
+            { name: "Software Engineering(UGCA1924).pdf", url: "files/Semester4/practical_file_software_engineering_UGCA1924.pdf" },
+            { name: "Web Designing(UGCA1928).pdf", url: "files/Semester4/practical_file_web_designing-UGCA1928.pdf" }
+        ]
+    };
 
-        // 🛠️ ऑटोमेटिक ऑर्गेनाइज्ड लिस्ट बनाने वाला कोड
-        function loadStudyMaterials() {
-            const container = document.getElementById('semester-list-box');
-            container.innerHTML = ""; // साफ करना
+    // 🛠️ 2. STUDY VAULT GENERATOR (Semesters ke liye loop)
+    function loadStudyMaterials() {
+        const container = document.getElementById('semester-list-box');
+        if(!container) return; // Agar box nahi mila toh code crash nahi hoga
+        container.innerHTML = ""; 
 
-            for (const semName in myStudyData) {
-                // सेमेस्टर का बॉक्स बनाना
-                const semBox = document.createElement('div');
-                semBox.className = 'semester-box';
-                semBox.innerHTML = `<h3>${semName}</h3>`;
+        for (const semName in myStudyData) {
+            const semBox = document.createElement('div');
+            semBox.className = 'semester-box';
+            semBox.innerHTML = `<h3>${semName}</h3>`;
 
-                const fileList = document.createElement('ul');
-                fileList.className = 'file-list';
+            const fileList = document.createElement('ul');
+            fileList.className = 'file-list';
 
-                // उस सेमेस्टर की फाइलें जोड़ना
-                myStudyData[semName].forEach(file => {
-                    const fileItem = document.createElement('li');
-                    fileItem.className = 'file-item';
-                    fileItem.innerHTML = `
-                        <span class="file-name">📄 ${file.name}</span>
-                        <div class="btn-group">
-                            <button class="preview-btn" onclick="openPreview('${file.name}', '${file.url}')">👁️ Preview</button>
-                            <a href="${file.url}" class="download-btn" download>⬇️ Download</a>
-                        </div>
+            myStudyData[semName].forEach(file => {
+                const fileItem = document.createElement('li');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <span class="file-name">📄 ${file.name}</span>
+                    <div class="btn-group">
+                        <button class="preview-btn" onclick="openPreview('${file.name}', '${file.url}')">👁️ Preview</button>
+                        <a href="${file.url}" class="download-btn" download>⬇️ Download</a>
+                    </div>
+                `;
+                fileList.appendChild(fileItem);
+            });
+
+            semBox.appendChild(fileList);
+            container.appendChild(semBox);
+        }
+    }
+
+    // 🔍 3. PREVIEW SYSTEM (Normal PDFs ke liye Modal pop-up)
+    function openPreview(name, url) {
+        document.getElementById('modal-file-title').innerText = name;
+        document.getElementById('pdf-viewer').src = url;
+        document.getElementById('preview-modal').style.display = 'flex';
+    }
+
+    function closePreview() {
+        document.getElementById('preview-modal').style.display = 'none';
+        document.getElementById('pdf-viewer').src = ""; 
+    }
+
+    // 🐍 4. DYNAMIC DATA ANALYTICS (Python Backend Connection)
+    // Yeh function hamare Python server se baat karke Excel data ka Table banayega
+    function loadDataAnalyticsPreview() {
+        const apiUrl = "http://127.0.0.1:5000/api/data-preview"; 
+        const previewContainer = document.getElementById('preview-container');
+        
+        if(!previewContainer) return;
+        previewContainer.innerHTML = "Navigating Data... Python Server Se Data Aa Raha Hai... Wait Karo.";
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(res => {
+                if (res.status === "success") {
+                    const data = res.data;
+                    
+                    // HTML Table ka structure shuru ho raha hai
+                    let tableHtml = `
+                        <table border="1" style="width:100%; border-collapse: collapse; margin-top: 15px; text-align: left;">
+                            <thead style="background-color: #f2f2f2;">
+                                <tr>
+                                    <th style="padding: 8px;">Date</th>
+                                    <th style="padding: 8px;">Category</th>
+                                    <th style="padding: 8px;">Product Name</th>
+                                    <th style="padding: 8px;">Sales</th>
+                                    <th style="padding: 8px;">Profit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                     `;
-                    fileList.appendChild(fileItem);
-                });
 
-                semBox.appendChild(fileList);
-                container.appendChild(semBox);
-            }
+                    // Excel ki har ek line (row) ko table row mein map karna
+                    data.forEach(row => {
+                        tableHtml += `
+                            <tr>
+                                <td style="padding: 8px;">${row["Date"]}</td>
+                                <td style="padding: 8px;">${row["Category"]}</td>
+                                <td style="padding: 8px;">${row["Product Name"]}</td>
+                                <td style="padding: 8px;">${row["Sales"]}</td>
+                                <td style="padding: 8px;">${row["Profit"]}</td>
+                            </tr>
+                        `;
+                    });
+
+                    tableHtml += `</tbody></table>`;
+                    previewContainer.innerHTML = tableHtml; // Screen par table display kar do!
+
+                } else {
+                    previewContainer.innerHTML = `<span style="color:red;">Error: ${res.message}</span>`;
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+                previewContainer.innerHTML = `<span style="color:red;">Python Server Chalu Nahi Hai! Pehle terminal mein 'python app.py' chalao.</span>`;
+            });
+    }
+
+    // 🔐 5. AUTHENTICATION & LOGIN LOGIC
+    const authPage = document.getElementById('auth-page');
+    const dashboardPage = document.getElementById('dashboard-page');
+    const loginForm = document.getElementById('login-form');
+    const signupForm = document.getElementById('signup-form');
+    const forgotForm = document.getElementById('forgot-form');
+
+    document.getElementById('go-to-signup')?.addEventListener('click', () => showAuthForm(signupForm));
+    document.getElementById('go-to-forgot')?.addEventListener('click', () => showAuthForm(forgotForm));
+    document.querySelectorAll('.go-to-login').forEach(link => link.addEventListener('click', () => showAuthForm(loginForm)));
+
+    function showAuthForm(form) {
+        [loginForm, signupForm, forgotForm].forEach(f => f?.classList.remove('active'));
+        form?.classList.add('active');
+    }
+
+    // Login hone par kya chalega
+    document.getElementById('real-login-form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        authPage.style.display = 'none';
+        dashboardPage.style.display = 'flex';
+        loadStudyMaterials(); // Login hote hi normal semesters load honge
+    });
+
+    document.getElementById('logout-link')?.addEventListener('click', () => {
+        dashboardPage.style.display = 'none';
+        authPage.style.display = 'flex';
+    });
+
+    // 🔄 6. TAB SWITCHING SYSTEM (Left Sidebar Tabs)
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        
+        document.getElementById(tabId).classList.add('active');
+        event.currentTarget.classList.add('active');
+
+        // 🔥 CRITICAL TRIGGER: Agar user ne Data Analytics wale tab par click kiya hai,
+        // tabhi hamara Python se data lane wala function chalega!
+        if (tabId === 'data-analytics') { 
+            loadDataAnalyticsPreview();
         }
-
-        // 🔍 प्रीव्यू खोलने का फंक्शन
-        function openPreview(name, url) {
-            document.getElementById('modal-file-title').innerText = name;
-            document.getElementById('pdf-viewer').src = url;
-            document.getElementById('preview-modal').style.display = 'flex';
-        }
-
-        // ❌ प्रीव्यू बंद करने का फंक्शन
-        function closePreview() {
-            document.getElementById('preview-modal').style.display = 'none';
-            document.getElementById('pdf-viewer').src = ""; // मेमोरी साफ़ करने के लिए
-        }
-
-        // 🔐 लॉगिन और टैब स्विचिंग का सामान्य लॉजिक
-        const authPage = document.getElementById('auth-page');
-        const dashboardPage = document.getElementById('dashboard-page');
-        const loginForm = document.getElementById('login-form');
-        const signupForm = document.getElementById('signup-form');
-        const forgotForm = document.getElementById('forgot-form');
-
-        document.getElementById('go-to-signup').addEventListener('click', () => showAuthForm(signupForm));
-        document.getElementById('go-to-forgot').addEventListener('click', () => showAuthForm(forgotForm));
-        document.querySelectorAll('.go-to-login').forEach(link => link.addEventListener('click', () => showAuthForm(loginForm)));
-
-        function showAuthForm(form) {
-            [loginForm, signupForm, forgotForm].forEach(f => f.classList.remove('active'));
-            form.classList.add('active');
-        }
-
-        document.getElementById('real-login-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            authPage.style.display = 'none';
-            dashboardPage.style.display = 'flex';
-            loadStudyMaterials(); // लॉगिन होते ही सारा डाटा लोड हो जाएगा
-        });
-
-        document.getElementById('logout-link').addEventListener('click', () => {
-            dashboardPage.style.display = 'none';
-            authPage.style.display = 'flex';
-        });
-
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
-    </script>
+    }
+</script>
 </body>
 </html>
